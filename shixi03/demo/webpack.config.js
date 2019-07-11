@@ -7,10 +7,10 @@ module.exports = {
   mode: "development",
   devtool: "cheap-module-eval-source-map", // 用于开发调试，方便清楚是那个文件出错 (共有7种)
   entry: {
-    index: "./src/index.js"
+    index: "./src/index2.js"
   },
   output: {
-    filename: "bundle.js", // 输出的文件名
+    filename: "bundle2.js", // 输出的文件名
     path: path.resolve(__dirname, "dist") //
   },
   module: {

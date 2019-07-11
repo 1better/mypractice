@@ -107,3 +107,7 @@ module.exports = {
 }
 ```
 
+> ps 
+>
+> > 1. shift + option + f 是 prettier的快捷键（修改格式。。）
+> > 2. shift + command + f 是 网页全屏显示
