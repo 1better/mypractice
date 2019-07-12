@@ -48,7 +48,7 @@
 >   );
 >   console.log(ReactDom)
 >   // react只更新需要更新的部分
->   ReactDom.render(element, document.getElementById('root'));
+>   	ReactDom.render(element, document.getElementById('root'));
 > }
 > 
 > setInterval(tick, 1000); */
@@ -98,7 +98,7 @@
 >   );
 > }
 > 
-> // 提取Comment组件
+> // 提取UserInfo组件
 > function UserInfo(props) {
 >   return (
 >     <div className="UserInfo">
