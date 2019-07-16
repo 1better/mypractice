@@ -1,0 +1,21 @@
+.instructions {
+	margin: 10px auto;
+	color: #777777;
+	text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
+	text-align: center;
+}
+
+.instructions a {
+	color: #336699;
+}
+
+.credits {
+	margin: 30px auto;
+	color: #999;
+	text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
+	text-align: center;
+}
+
+.credits a {
+	color: #888;
+}
