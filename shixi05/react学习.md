@@ -34,7 +34,7 @@
 
 ## 为什么 定义的组件需要首字母大写
 
-> 为了原生html的标签区分，如果是小写的话react会以为它是一个原生html标签，这样会因此报错
+> 为了和原生html的标签区分，如果是小写的话react会以为它是一个原生html标签，这样会因此报错
 
 ## 为什么定义的list中的li必须要有key值
 
@@ -68,7 +68,7 @@
 > }
 > 
 > A.prototype.getName = function() {
->   console.log(this)
+>   	console.log(this)
 > }
 > 
 > var a = new A()
