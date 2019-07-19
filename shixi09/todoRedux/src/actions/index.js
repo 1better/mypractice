@@ -17,7 +17,21 @@ export const toggleAllTodo = checked => ({
   checked
 })
 
-export const allCompleted = checked => ({
+export const deleteOneTodo = id => ({
+  type: 'DELETE_ONETODO',
+  id
+})
+
+export const updateOneTodo = (id,value) => ({
+  type: 'UPDATE_ONETODO',
+  id,
+  value
+})
+export const completed = number => ({
   type: 'COMPLETED',
-  checked
+  number
+})
+
+export const filter = () => ({
+  type: 'FILTER'
 })

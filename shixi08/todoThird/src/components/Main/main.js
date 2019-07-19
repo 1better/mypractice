@@ -1,14 +1,13 @@
 //中间部分的js
 import React, { Component } from "react";
 import {connect} from 'react-redux'
-import {toggleOneTodo,toggleAllTodo} from '../../actions'
+import {toggleOneTodo,toggleAllTodo,allCompleted} from '../../actions'
 
 import './main.css' 
 
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = {allCompleted:false}
   }
 
   // handleAllChange = e => {
@@ -17,10 +16,9 @@ class Main extends Component {
   // };
 
   handleAll = (allCompleted) => {
-    console.log(allCompleted)
-    // let {handleAllChange} = this.props
-    this.setState({allCompleted:true})
-    // handleAllChange(allCompleted)
+    let {handleAllChange,setAllCompleted} = this.props
+    setAllCompleted(allCompleted)
+    handleAllChange(allCompleted)
   }
 
   // hanleUpdate = (index,msg) => {
@@ -30,8 +28,7 @@ class Main extends Component {
 
   render() {
     // 接受store传过来的item数据 
-    let {todos,handleOneChange} = this.props
-    let {allCompleted} = this.state
+    let {todos,handleOneChange,completed} = this.props
     let list = todos.map((item, index) => {
       let display = item.checked ? 'block':'none'
       return (
@@ -42,7 +39,7 @@ class Main extends Component {
               type="checkbox"
               checked={item.checked}
               // 当checked发生改变，传递给父组件来处理这个状态
-              onChange={()=>handleOneChange(index)}
+              onChange={()=>{handleOneChange(index)}}
             />
             <label> {item.value} </label>
             {/* 删除操作 onClick={this.props.onDel(index)}*/}
@@ -57,7 +54,7 @@ class Main extends Component {
         <input
           id="toggle-all"
           type="checkbox"
-          checked={allCompleted}
+          checked={completed}
           onChange={(e)=>this.handleAll(e.target.checked)}
         />
         <label htmlFor="toggle-all">Mark all as complete</label>
@@ -79,6 +76,9 @@ function mapDispatchProps(dispatch) {
     },
     handleAllChange: (checked) => {
       dispatch(toggleAllTodo(checked))
+    },
+    setAllCompleted:(checked) => {
+      dispatch(allCompleted(checked))
     }
   }
 }
