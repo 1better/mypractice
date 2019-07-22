@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+</head>
+<body>
+  <!-- backbone 的 事件的原理 (大体) -->
+  <!-- 通过继承来实现事件的绑定 -->
+  <script>
+    var Task = Backbone.model.extends({
+      // 
+      // idAttribute:'guid', 唯一标识更改  默认是id
+      urlRoot: 'url' // 必须  与远程服务器进行连接
+    })
+
+
+
+    var task = new Task({
+      
+      'title':'course1',
+      'description':'des1'
+    })
+
+    task.save() // 没有id值时 发送 POST请求  给一个id
+    // 有 id值时 发送PUT或者PATCh请求
+
+    task.save('title','course2') // 更改值
+
+    task.fetch() //抓取远程服务器的内容  GET请求
+
+    task.destroy() //删除  PUT请求
+
+    // sync 事件 只要和服务器交互都会触发
+
+  </script>
+</body>
+</html>

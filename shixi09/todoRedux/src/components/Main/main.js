@@ -52,7 +52,7 @@ class Main extends Component {
   render() {
     // 接受store传过来的item数据 
     let {todos,completed} = this.props
-    let list = todos.map(item => {
+    let list = todos.map((item) => {
       let display = item.checked ? 'block':'none'
       return (
         <li key={item.id} className={item.checked ? "done" : ""}>
@@ -65,7 +65,7 @@ class Main extends Component {
               onChange={(e)=>{this.hanleOne(e.target.checked,item.id,completed)}}
             />
             <label> {item.value} </label>
-            {/* 删除操作 onClick={this.props.onDel(index)}*/}
+            {/* 删除操作 onClick={this.props.onDel(item.id)}*/}
             <a className="destroy" style={{display}} onClick={() => this.handleDel(item.id) }>删除</a>
             <a className="update"  onClick={() => this.handleUpdate(item.id)}>更新</a>
           </div>

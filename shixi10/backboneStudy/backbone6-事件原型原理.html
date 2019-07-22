@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+</head>
+<body>
+  <!-- backbone 的 事件的原理 (大体) -->
+  <!-- 通过继承来实现事件的绑定 -->
+  <script>
+    /* var Cat = function() {
+
+    }
+    // 都是继承 Backbone.Events 来实现的事件的监听以及绑定(on listenTo off ...)
+    _.extend(Cat.prototype,Backbone.Events)
+
+    var jerry = new Cat()
+
+    var tom = new Cat()
+
+    tom.on('run',function(){
+      console.log('tom run')
+    })
+
+    jerry.listenTo(tom,'run',function(){
+      console.log('jerry watch tom run')
+    }) */
+    
+    /* 
+    var jerry = {}
+    var tom = {}
+
+    _.extend(tom,Backbone.Events)
+    _.extend(jerry,Backbone.Events)
+
+    jerry.listenTo(tom,'run',function(){
+      console.log('jerry watch tom run')
+    }) */
+  </script>
+</body>
+</html>

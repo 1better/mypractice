@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+</head>
+<body>
+  <!-- backbone 的 model的用法 -->
+  <script>
+    var TodoItem = Backbone.Model.extend({})
+    var obj = {
+      x:1,
+      y:2
+    }
+
+    var todoItem = new TodoItem(obj)
+
+    var TodoItemView = Backbone.View.extend({
+      tagName: 'div',
+      className: 'todo-list',
+      events: {
+        'click button': 'handleDelete',
+        'click h2': 'handleChange'
+      },
+      initialize(){
+        this.listenTo(this.model,'change',this.con)
+        this.listenTo(this.model,'destroy',this.remove)
+      },
+      render() {
+        var json = this.model.toJSON()
+        this.$el.html(
+          '<h2>'+json.x+'</h2><p>'+json.y+'</p><button>删除</button>'
+        )
+        return this
+      },
+      handleDelete() {
+        this.model.destroy()
+      },
+      handleChange() {
+        alert(this)
+      }
+    })
+    
+    var todoIetmView = new TodoItemView({
+      model:todoItem
+    })
+
+    todoIetmView.render().$el.appendTo($('body'))
+
+  </script>
+</body>
+</html>

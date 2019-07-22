@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+</head>
+<body>
+  <!-- backbone 的 model的用法 -->
+  <script>
+    var obj = {
+      'title': 'task1',
+      'description': 'description'
+    }
+
+    var TodoItem = Backbone.Model.extend({})
+
+    var todoItem = new TodoItem(obj)
+
+
+    // 内部会进行属性的比较  如果没有变化不会触发change事件，需要属性变化才会触发change事件 
+    // set 中有一个option  slient:true 可以更改内容不触发onchange事件
+    todoItem.on('change',function(){
+      if(this.hasChanged('title')){
+        console.log('changed title')
+      }
+    })
+
+    // trigger可以触发自定义事件
+
+    // on('change:title') 只针对title属性进行监听
+
+    //取消监听  off() 没有参数就全部取消
+
+    // off('change:title') 把这个监听的取消掉
+
+    // once 只执行一次  相当于 on 了之后 就  off掉
+
+    var todoItem2 = new TodoItem()
+
+    // todoItem2监听todoItem  
+    todoItem2.listenTo(todoItem,'change:title',function(){
+      console.log(this) // 这个this指向 todoItem2
+
+      // listenToOnce 
+    })
+
+    
+  </script>
+</body>
+</html>

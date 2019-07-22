@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+</head>
+<body>
+  <!-- backbone 的 view事件的用法 -->
+  <script>
+
+    var ToDoItem = Backbone.Model.extend({
+
+    })
+
+    var todoItem = new ToDoItem({
+      title:'task',
+      des: 'des'
+    })
+
+    var todoItem2 = new ToDoItem({
+      title:'task2',
+      des: 'des2'
+    })
+    
+    var  ToDoItemView = Backbone.View.extend({
+      tagName: 'div',
+      className: 'todo-Item',
+      // 触发事件
+      events: {
+        // 后边字符串就是定义的方法
+        // 'click': 'handleClick'
+        // 后边可以跟jq选择器来指定某一个元素使用这个用法
+        'click button': 'handleClick'
+      },
+      // 这一步写错了 怪不得  initialize 拼错  尴尬。。。
+      initialize: function() {
+        this.listenTo(this.model,'change',this.render)
+        this.listenTo(this.model,'destroy',this.remove)
+      },
+      render:function() {
+        var json = this.model.toJSON()
+        this.$el.html('<h3>'+json.title+'<br/>'+json.des+'</h3><button>delete</button>')
+        return this
+      },
+      handleClick: function() {
+        console.log('为什么不行啊')
+        console.log(this.model)
+        this.model.destroy()
+      }
+
+    })
+
+    var todoItemView = new ToDoItemView({
+      model:todoItem
+    })
+
+    var todoItemView2 = new ToDoItemView({
+      model:todoItem2
+    })
+
+    todoItemView.render().$el.appendTo($('body'))
+    todoItemView2.render().$el.appendTo($('body'))
+  </script>
+</body>
+</html>

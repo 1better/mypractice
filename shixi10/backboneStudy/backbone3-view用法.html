@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+  </head>
+  <body>
+    <!-- <div id="header" ></div> -->
+    <!-- backbone 的 view的用法 -->
+    <script>
+      var TodoItemView = Backbone.View.extend({
+        // 三个内置属性
+        tagName: "p",
+        className: "haha",
+        id: "pp",
+        //如果其它属性的话  需要在attributes里边写
+        // attributes:{
+        //   style: 'color:red;'
+        // },
+        // 页面上有值可以这样写
+        // el:'div#header',
+        render: function() {
+          this.$el.html("<span>1111</span>");
+          return this;
+        }
+      });
+
+      var todoItemView = new TodoItemView({
+      });
+
+      todoItemView.render().$el.appendTo("body");
+
+      console.log(todoItemView);
+
+      // todoItemView.remove()  这个方法内置 可以把界面上的元素移除
+    </script>
+  </body>
+</html>
