@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <input type="text" id='mytext'>
+  <script>
+    var mytext = document.getElementById('mytext')
+    console.log(mytext.id) //mytext
+    console.log(mytext.value) // ''
+    console.log(mytext.aaa) // undefined
+
+    /* mytext.setAttribute('value','111')
+    console.log(mytext.getAttribute('value')) // 111
+    console.log(mytext.value) // 111
+    mytext.value = '222'
+    console.log(mytext.getAttribute('value')) // 111 */
+
+    /* mytext.value = 111
+    console.log(mytext.getAttribute('value')) //null */
+
+   /*  mytext.setAttribute('aaa','333')  // 这样页面上是 <input type="text" id='mytext' aaa='333'>
+    console.log(mytext.getAttribute('aaa')) // 333
+    console.log(mytext.aaa) // undefined */
+
+    /* mytext.aaa = 333 // 这样页面上还是 <input type="text" id='mytext'>
+    console.log(mytext.getAttribute('aaa')) // null
+    console.log(mytext.aaa)  // 333 */
+  </script> -->
+
+  <input type="checkbox" id="mycheck1" >111
+  <script>
+    var check = document.getElementById('mycheck1')
+    /* console.log(check.checked) false
+    check.checked = true  // 这样可以更改 */
+
+    console.log(check.getAttribute('checked')) // null
+    check.setAttribute('checked',false) // 设定什么值都会改变为true
+
+    console.log(check.checked)  // 得到的一直是true
+    check.checked = false  // 只要这样操作了 setAttrbute就不管用了
+    
+    check.setAttribute('checked','222') 
+  </script> 
+</body>
+</html>

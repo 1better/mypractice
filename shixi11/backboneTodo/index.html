@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+  </head>
+  <body>
+    <div id="todoapp">
+      <header>
+        <h1>Todos</h1>
+        <input id="new-todo" type="text" placeholder="What needs to be done?" />
+      </header>
+
+      <section id="main">
+        <input id="toggle-all" type="checkbox" />
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list"></ul>
+      </section>
+
+      <footer>
+        <a id="clear-completed">Clear completed</a>
+        <div id="todo-count"></div>
+      </footer>
+    </div>
+
+    <div id="instructions">
+      Double-click to edit a todo.
+    </div>
+
+    <div id="credits">
+      Created by
+      <br />
+      <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>.
+      <br />Rewritten by:
+      <a href="http://addyosmani.github.com/todomvc">TodoMVC</a>.
+    </div>
+
+    <!-- Templates  underScore使用-->
+    <script type="text/template" id="item-template">
+      <div class="view">
+        <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+        <label><%- title %></label>
+        <a class="destroy"></a>
+      </div>
+      <!-- <input class="edit" type="text" value="<%- title %>" /> -->
+    </script>
+
+    <script type="text/template" id="stats-template">
+      <% if (completedNumber) { %>
+        <a id="clear-completed">Clear <%= completedNumber %> completed <%= completedNumber == 1 ? 'item' : 'items' %></a>
+      <% } %>
+      <div class="todo-count"><b><%= leftNumber %></b> <%= leftNumber == 1 ? 'item' : 'items' %> left</div>
+    </script>
+
+    <script>
+      // 设定list
+      var list = [{ title: "111", done: false }];
+
+      var List = Backbone.Collection.extend({});
+      // 为每一个li设定一个item view
+      var ItemView = Backbone.View.extend({
+        tagName: "li",
+        template: _.template($("#item-template").html()),
+        events: {
+          "click .toggle": "complted"
+        },
+        initialize() {
+          this.listenTo(this.model,'change',this.handleCompleted)
+        },
+        render() {
+          var msg = this.model.toJSON();
+          this.$el.append(this.template(msg));
+          return this;
+        },
+        // checked 点击 true或者false的事件  需要改变model
+        complted(e) {
+          if (e.target.checked) {
+            this.model.set("done",true);
+          }else {
+            this.model.set("done",false);
+          }
+        },
+        // 改变model的时候 触发的 事件
+        handleCompleted() {
+          // 内部会判断你究竟改变还是没有改变  这是change自带的属性机制
+          this.$el.toggleClass('done')
+        }
+      });
+
+      var aList = new List(list);
+      // 总的view
+      var ToDoApp = Backbone.View.extend({
+        el: "#todoapp",
+        template: _.template($('#stats-template').html()),
+        events: {
+          // 添加内容
+          "keydown #new-todo": "handleAdd",
+          "click #toggle-all": "handleAllDone",
+          'click #clear-completed': 'handleFilter'
+        },
+        initialize() {
+          this.$main = $("#main");
+          this.$footer = $("footer");
+          this.$todo = $("#todo-list");
+          this.$toggle = $('.toggle')
+
+          this.completedNumber = 0;
+          if (this.collection) {
+            // 监听添加事件
+            this.listenTo(this.collection, "add", this.addView);
+            // 当model改变的时候   这个collection会改变 监听它的改变
+            this.listenTo(this.collection,'change',this.handleComplted)
+            // 当集合 reset（经过过滤）的时候 触发一下 render 重新渲染一遍
+            this.listenTo(this.collection,'reset',this.render)
+          }
+        },
+        registerView(model) {
+          var view = new ItemView({ model });
+          this.$todo.append(view.render().$el);
+        },
+        render() {
+          // 每次render 清空一下todo里边的元素  重新渲染
+          this.$todo.empty()
+          // 把每一个li的view都添加到 this.$todo
+          this.collection.each(this.registerView,this)
+          var length = this.collection.length;
+          // 如果长度为0 就不显示 反之要显示
+          if (length) {
+            this.$main.show();
+            this.$footer.show();
+            // 显示footer的时候 重新渲染一下完成的数量以及未完成的数量
+            var msg = {completedNumber:this.completedNumber,leftNumber:length-this.completedNumber} 
+            this.$footer.html(this.template(msg))
+          } else {
+            this.$main.hide();
+            this.$footer.hide();
+          }
+        },
+        // 监听集合改变的事件  找出未完成的数量以及完成的数量 处理 toggle-all 以及 toggle的逻辑
+        handleComplted() {
+          var length = this.collection.length;
+          this.completedNumber = 0;
+          this.collection.each(model=>{
+            var json = model.toJSON()
+            if(json.done) {
+              this.completedNumber ++ ;
+            }
+            if(this.completedNumber === length) {
+              $('#toggle-all').prop('checked',true)
+            }else {
+              $('#toggle-all').prop('checked',false)
+            }
+            var msg = {completedNumber:this.completedNumber,leftNumber:length-this.completedNumber} 
+            this.$footer.html(this.template(msg))
+          })
+        },
+        // handleAllDone事件  处理 mark all completed的逻辑
+        handleAllDone(e) {
+          var check = e.target.checked
+          var length = this.collection.length
+          this.collection.each(model=>{
+            // 这个model改变
+            model.set("done",check);      
+          })
+          $('.toggle').prop('checked',check)
+          // 当用下面的方法的时候 显示有bug 可能是因为attribute和属性值的问题        
+          //$('.toggle').attr('checked',check)
+          if(check) {
+            this.completedNumber = length
+          } else {
+            this.completedNumber = 0
+          }
+          var msg = {completedNumber:this.completedNumber,leftNumber:length-this.completedNumber} 
+          this.$footer.html(this.template(msg))
+        },
+        // 处理model事件
+        handleAdd(e) {
+          if (e.keyCode === 13) {
+            if (e.target.value.trim() == "") {
+              alert("内容为空不可以输入");
+              return;
+            }
+            var item = { title: e.target.value, done: false };
+            // 会触发监听 add的事件
+            this.collection.add(item);
+            e.target.value = "";
+          }
+        },
+        // 触发的监听事件函数
+        addView(model) {
+          var view = new ItemView({ model });
+          // 添加上去
+          this.$todo.append(view.render().$el);
+          var length = this.collection.length;
+
+          //这一步是为了防止 当页面所有元素都没有的时候 添加 只是 todo里边添加  但是main并没有显示 
+          this.$main.show();
+          this.$footer.show();
+          var msg = {completedNumber:this.completedNumber,leftNumber:length-this.completedNumber} 
+          this.$footer.html(this.template(msg))
+        },
+        // 过滤函数 reset一下
+        handleFilter() {
+          console.log(this.collection)
+          var collection = this.collection.where({done:false})
+          console.log(collection)
+          this.completedNumber = 0;
+          $('#toggle-all').prop('checked',false)
+          this.collection.reset(collection)
+        }
+      });
+      var todoApp = new ToDoApp({ collection: aList });
+      todoApp.render();
+    </script>
+  </body>
+</html>
