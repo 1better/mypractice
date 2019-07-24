@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.marionette/4.1.2/backbone.marionette.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.radio/2.0.0-pre.2/backbone.radio.js"></script>
+  </head>
+  <body>
+    <script>
+      //   初始化
+
+      /*     const MyObject = Mn.MnObject.extend({
+        // 初始化功能
+        initialize(options, arg2) {
+          console.log(options.foo, this.getOption("foo"), arg2);
+        }
+      });
+      const myObject = new MyObject({ foo: "bar" }, "baz"); */
+
+      // triggerMethod方法
+      /* const MyObject = Mn.MnObject.extend({
+        initialize() {
+          // 会触发 onFoo 功能   
+          // triggerMethod('before:foo') 触发“onBeforeFoo”功能
+          this.triggerMethod("foo", "baz");
+        },
+        onFoo(bar) {
+          console.log(bar);
+        }
+      });
+      const myObj = new MyObject(); // console.log "baz"
+      myObj.triggerMethod("foo", "qux"); // console.log "qux" */
+
+      //  广播绑定事件
+      /*  const MyView = Mn.View.extend({
+        fooEvents: {
+          "change:foo": "doSomething"
+        },
+        initialize() {
+          this.fooChannel = Mn.Radio.channel("foo");
+          this.bindEvents(this.fooChannel, this.fooEvents);
+        },
+        doSomething() {
+          console.log(2222222)
+          // the "change:foo" event was fired from the radio channel
+          // respond to it appropriately, here.
+        }
+      });
+
+      const myView = new MyView({}) */
+
+      // getOption 要访问选项，我们使用该getOption方法。
+      // getOption如果未在选项中定义，则将回退到在实例上定义的相同名称的值
+
+      // mergeOptions
+      const MyObject = Mn.MnObject.extend({
+        initialize(options) {
+          this.mergeOptions(options, ["model", "something"]);
+          // this.model and this.something will now be available
+        }
+      });
+
+      const myObject = new MyObject({
+        model: new Backbone.Model(),
+        something: "test",
+        another: "value"
+      });
+
+      console.log(myObject.model);
+      console.log(myObject.something);
+      console.log(myObject.getOption('another'));
+    </script>
+  </body>
+</html>

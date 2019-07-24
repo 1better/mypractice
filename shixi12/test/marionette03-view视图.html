@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.marionette/4.1.2/backbone.marionette.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.radio/2.0.0-pre.2/backbone.radio.js"></script>
+  </head>
+  <body>
+    <script>
+      //view 渲染
+      const MyView = View.extend({
+        template: _.template(`
+        <div id="first-region"></div>
+        <div id="second-region"></div>
+        <div id="third-region"></div>
+        `),
+        regions: {
+          firstRegion: "#first-region",
+          secondRegion: "#second-region"
+        },
+        onRender() {
+          this.showChildView('firstRegion', new SubView());
+        }
+      });
+
+
+      // 访问子视图   const first = this.getChildView('firstRegion');
+      // 分离子视图   const view = this.detachChildView('firstRegion');
+    //              this.showChildView('secondRegion', view);
+
+    // 销毁子视图     myChildView.getChildView('regionName').destroy();   myChildView.getRegion('regionName').empty();
+    </script>
+  </body>
+</html>

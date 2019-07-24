@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.marionette/4.1.2/backbone.marionette.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.radio/2.0.0-pre.2/backbone.radio.js"></script>
+  </head>
+  <body>
+    <script>
+      //可以这样
+      /*  const MyView = View.extend({
+        className: "bg-success",
+        template: "#template-identifier",
+        regions: {
+          myRegion: ".my-region"
+        },
+        modelEvents: {
+          change: "removeBackground"
+        },
+        removeBackground() {
+          this.$el.removeClass("bg-success");
+        }
+      }); */
+      // 也可以用函数返回值
+      /*   const MyView = View.extend({
+        className() {
+          return this.model.successful() ? "bg-success" : "bg-error";
+        },
+
+        template: "#template-identifier",
+
+        regions() {
+          return {
+            myRegion: ".my-region"
+          };
+        },
+
+        modelEvents() {
+          const wasSuccessful = this.model.successful();
+          return {
+            change: wasSuccessful ? "removeBackground" : "alert"
+          };
+        },
+
+        removeBackground() {
+          this.$el.removeClass("bg-success");
+        },
+        alert() {
+          console.log("model changed");
+        }
+      }); */
+
+      /*    const MyView = View.extend({
+        template: "#template-identifier"
+      });
+
+      // 设置触发器
+      const myView = new MyView({
+        triggers: {
+          "click a": "show:link"
+        }
+      }); */
+
+
+
+      const MyView = Mn.View.extend({
+        checkOption() {
+          console.log(this.getOption("foo"));
+        }
+      });
+
+      const view = new MyView({
+        foo: "some text"
+      });
+
+      view.checkOption();
+    </script>
+  </body>
+</html>
