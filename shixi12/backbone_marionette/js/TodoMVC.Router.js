@@ -22,7 +22,8 @@ var TodoMVC = TodoMVC || {};
 	// ------------------------------
 	//
 	// Control the workflow and logic that exists at the application
-	// level, above the implementation detail of views and models
+  // level, above the implementation detail of views and models
+  
 	TodoMVC.Controller = Mn.Object.extend({
 
 		initialize: function () {

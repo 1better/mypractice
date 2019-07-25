@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <div id="todoapp">
+      <header></header>
+      <section id="main"></section>
+      <footer></footer>
+    </div>
+
+    <div id="instructions">
+      Double-click to edit a todo.
+    </div>
+    <div id="credits">
+      Created by
+      <br />
+      <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>.
+      <br />Rewritten by:
+      <a href="http://addyosmani.github.com/todomvc">TodoMVC</a>.
+    </div>
+
+    
+    
+    <!-- main组件 模版引擎 -->
+    <script type="text/template" id="main-template">
+      <input id="toggle-all" type="checkbox" />
+      <label for="toggle-all">Mark all as complete</label>
+      <ul id="todo-list"></ul>
+    </script>
+    
+    <!-- item-template模版引擎-->
+    <script type="text/template" id="li-template">
+      <div class="view">
+        <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+        <label><%- title %></label>
+        <a class="destroy"></a>
+      </div>
+      <!-- <input class="edit" type="text" value="<%- title %>" /> -->
+    </script>
+
+    <!-- header组件 模版引擎 -->
+    <script type="text/html" id="header-template">
+      <h1>Todos</h1>
+      <input id="new-todo" type="text" placeholder="What needs to be done?" />
+    </script>
+
+    <!-- footer组件 模版引擎-->
+    <script type="text/html" id="footer-template">
+      <% if (completedNumber) { %>
+        <a id="clear-completed">Clear <%= completedNumber %> completed <%= completedNumber == 1 ? 'item' : 'items' %></a>
+      <% } %>
+      <div class="todo-count"><b><%= leftNumber %></b> <%= leftNumber == 1 ? 'item' : 'items' %> left</div>
+    </script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.js/1.4.0/backbone-min.js"></script>
+    <script src="https://cdn.bootcss.com/backbone.marionette/4.1.2/backbone.marionette.js"></script>
+    <script src="js/TodoMVC-Application.js"></script>
+    <script src="js/TodoMVC-Controller.js"></script>
+    <script src="js/TodoMVC-Layout.js"></script>
+    <script src="js/TodoMVC-TodoList.js"></script>
+    <script src="js/TodoMVC-App.js"></script>
+  </body>
+</html>

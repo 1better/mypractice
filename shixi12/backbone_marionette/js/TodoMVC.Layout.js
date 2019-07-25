@@ -20,7 +20,8 @@ var TodoMVC = TodoMVC || {};
 	});
 
 	// Layout Header View
-	// ------------------
+  // ------------------
+  console.log(Mn)
 	TodoMVC.HeaderLayout = Mn.View.extend({
 
 		template: '#template-header',
@@ -60,7 +61,7 @@ var TodoMVC = TodoMVC || {};
 	});
 
 	// Layout Footer View
-	// ------------------
+  // ------------------
 	TodoMVC.FooterLayout = Mn.View.extend({
 		template: '#template-footer',
 
