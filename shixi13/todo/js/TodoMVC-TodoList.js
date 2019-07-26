@@ -7,12 +7,19 @@ var TodoMVC = TodoMVC || {};
     template: _.template($('#li-template').html()),
     tagName: 'li',
     // ui
+    className() {
+      console.log(2)
+      return 'done'
+    },
     events: {
       'click .toggle': 'onHandleCheck'
     },
-    initialize() {
-      this.listenTo(this.model,'change',this.reRender)
+    modelEvents: {
+      'change': 'render'
     },
+    /* initialize() {
+      this.listenTo(this.model,'change',this.reRender)
+    }, */
     onHandleCheck(e) {
       var check = e.target.checked
       if(check) {

@@ -16,6 +16,7 @@ var TodoMVC = TodoMVC || {}
       footer: 'footer'
     }
   })
+  // 头部组件   View需要有一个集合
   TodoMVC.HeaderLayout = Mn.View.extend({
 
     template: _.template($('#header-template').html()),
@@ -30,15 +31,19 @@ var TodoMVC = TodoMVC || {}
     },
     handleAdd(e) {
       if (e.keyCode === 13) {
+        if(!this.collection.length) {
+          $('footer').show()
+          $('#main').show()
+        }
         if (e.target.value.trim() == "") {
           alert("内容为空不可以输入");
           return;
         }
         var item = {title:e.target.value,done:false}
+        // 添加这个item
         this.collection.add(item);
         e.target.value = "";
-        $('footer').show()
-        $('#main').show()
+        
       }
       
     }
@@ -51,13 +56,13 @@ var TodoMVC = TodoMVC || {}
 		serializeData: function () {
 			var completedNumber = 0;
 			var leftNumber = this.collection.length;
-
 			return {
         completedNumber,
         leftNumber
 			};
 		},
 		initialize: function () {
+      // 监听collection的改变的事件 重新渲染
       this.listenTo(this.collection,'add',this.reRender),
       this.listenTo(this.collection,'change',this.reRender),
       this.listenTo(this.collection,'reset',this.reRender)

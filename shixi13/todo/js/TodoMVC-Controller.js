@@ -6,6 +6,7 @@ var TodoMVC = TodoMVC || {} ;
 
   //  为TodoMVC设定一个完成项的参数
   TodoMVC.CompletedNumber = 0
+
   TodoMVC.Controller = Mn.MnObject.extend({
     initialize() {
       // 测试数据
@@ -15,13 +16,16 @@ var TodoMVC = TodoMVC || {} ;
       this.todoList = new TodoMVC.TodoList(list);
     },
     start() {
+      // 展示头部组件
       this.showHeader(this.todoList)
+      // 展示尾部组件
       this.showFooter(this.todoList)
+      // 展示中间组件
       this.showMain(this.todoList)
       // 判断todoList的长度 
       this.ifShow(this.todoList)
     },
-    // 
+    // 判断是否需要显示中间和底部组件
     ifShow(todoList) {
       if(todoList.length) {
         $('#main').show()
