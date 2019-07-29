@@ -67,12 +67,15 @@
       var ItemView = Backbone.View.extend({
         tagName: "li",
         template: _.template($("#item-template").html()),
-        events: {
+        events: { 
           "click .toggle": "complted"
         },
         initialize() {
-          this.listenTo(this.model,'change',this.handleCompleted)
+          this.listenTo(this.model,'change',function(){
+            console.log(this)
+          })
         },
+        //this.handleCompleted
         render() {
           var msg = this.model.toJSON();
           this.$el.append(this.template(msg));

@@ -28,7 +28,7 @@ export const updateOneTodo = (id,value) => ({
   value
 })
 export const completed = number => ({
-  type: 'COMPLETED',
+  type: 'TSET_COMPLETED',
   number
 })
 

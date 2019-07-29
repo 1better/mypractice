@@ -47,12 +47,16 @@ class Main extends Component {
         oldValue = item.value
     }})
     const value = window.prompt(`原先为${oldValue}`)
+    if(!value||!value.trim()) 
+      {
+        alert('更新内容不可为空！'); return 
+      }
     onUpdate(id,value)
   }
   render() {
     // 接受store传过来的item数据 
     let {todos,completed} = this.props
-    let list = todos.map((item) => {
+    let list = todos.map((item,index) => {
       let display = item.checked ? 'block':'none'
       return (
         <li key={item.id} className={item.checked ? "done" : ""}>
@@ -105,6 +109,7 @@ function mapDispatchProps(dispatch) {
     },
     setCompleted:(number) => {
       dispatch(completed(number))
+      // dispatch(completed(number))
     },
     onDel:(id) => {
       dispatch(deleteOneTodo(id))

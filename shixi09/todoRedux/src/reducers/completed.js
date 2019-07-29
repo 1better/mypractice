@@ -1,9 +1,13 @@
-const completed = (state = 0,action) => {
+const completed = (state = 1,action) => {
+  console.log(action)
   switch(action.type){
     case 'COMPLETED':
       return action.number
-    default: 
+    default: {
+      console.log(state)
       return state
+    }
+      
   }
 }
 
