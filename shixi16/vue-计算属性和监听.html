@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="firstName">
+    <br>
+    <input type="text" v-model="lastName">
+    <br>
+    <input type="text" v-model="allName">
+    <!-- <child :child="msg"></child> -->
+  </div>
+  <!-- <template id="child">
+    <ul>
+      <li v-for="(item,index) in child" :key='index' >
+        {{item}}
+      </li>
+      <button @click="changeParent"></button>
+    </ul>
+  </template> -->
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        firstName: '',
+        lastName: ''
+      },
+      computed: {
+        allName: {
+          get() {
+            return this.firstName + '---' + this.lastName
+          },
+          set(newValue) {
+            console.log(newValue)
+            var names = newValue.split('---')
+            this.firstName = names[0]
+            this.lastName = names[names.length - 1]
+          }
+        }     
+      }
+     /*  methods: {
+        changeParent() {
+          this.$emit('')
+        }
+      },
+      components: {
+        'child':{
+          template: '#child',
+          props:['child']
+        }
+      } */
+    })
+  </script>
+</body>
+</html>

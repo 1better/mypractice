@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{msg2}}
+    <child :child="msg" @changemsg2='change'></child>
+  </div>
+  <template id="child">
+    <ul>
+      <li v-for="(item,index) in child" :key='index' >
+        {{item}}
+      </li>
+      <button @click="changeParent"></button>
+    </ul>
+  </template>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: [
+          '111',
+          '222',
+          '333'
+        ],
+        msg2: 'woshi'
+      },
+      methods: {
+        change(msg) {
+          this.msg2 = msg
+        }
+      },
+      components: {
+        'child':{
+          template: '#child',
+          props:['child','changemsg2'],
+          methods: {
+            changeParent() {
+              this.$emit('changemsg2','msg2')
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
