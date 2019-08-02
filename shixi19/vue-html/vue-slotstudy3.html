@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .header {
+      color: red
+    }
+    .footer {
+      color: blue
+    }
+  </style>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <Child>
+      <p slot="abc" slot-scope="scope">
+        {{scope.text}}
+        {{scope.name}}
+      </p>
+    </Child>
+  </div>
+  <template id="Child">
+    <div>
+      <div class="header">
+        <!-- 这样333也不显示 -->
+          <slot name="header">111</slot>
+      </div>
+      <div class="footer">
+          <slot text="footer">333</slot>
+      </div>
+    </div>
+  </template>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '我是父组件通过slot插入的内容',
+        text: '11111111',
+        name: 'zzz'
+
+      },
+      components: {
+        Child:{
+          template:'#Child',
+          data() {
+            return {
+              name: 222,
+              text: '111'
+            }   
+          }
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

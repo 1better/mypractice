@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <Child>
+      {{msg}}
+    </Child>
+  </div>
+  <template id="Child">
+    <div>
+      <slot>
+        父组件未插入内容
+      </slot>
+      <br>
+      {{msg}}
+    </div>
+  </template>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '我是父组件通过slot插入的内容'
+      },
+      components: {
+        Child:{
+          template:'#Child',
+          data() {
+            return {
+              msg: 111
+            }   
+          }
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>
