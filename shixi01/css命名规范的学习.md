@@ -46,7 +46,7 @@
 > 4
 > 	border bakground
 > 5 
->   font line-height(注意先font再line-height)
+>   	font line-height(注意先font再line-height)
 > 6
 > 	overflow z-index
 > ```
