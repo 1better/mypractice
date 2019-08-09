@@ -5,40 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 </head>
 <body>
   <div id="app">
     <input type="text" v-model="cityName">
   </div>
   <script>
-    var oScript = document.createElement('script');
-    oScript.type = 'text/javascript';
-    oScript.src = '//g.alicdn.com/sd/smartCaptcha/0.0.1/index.js';
-    document.head.appendChild(oScript);
-  </script>
-  <script>
-    var vm = new Vue({
-      el: '#app',
-      data: {
-        cityName: 'hai'
-      },
-      created() {
-        var self = this
-        console.log(self)
-        // 如果字符串没有改变这里不显示
-        /* setInterval(function(){
-          self.cityName = 'hai'
-          console.log(1)
-        },1000) */
-      },
-      // 这样是不发生改变的
-      watch: {
-        cityName(newName,oldName) {
-          console.log(newName + '-------' + oldName)
+    var aiScript = document.createElement('script');
+    aiScript.type = 'text/javascript';
+    aiScript.src = 'https://cdn.bootcss.com/vue/2.6.10/vue.js';
+    document.head.appendChild(aiScript);
+    aiScript.onload = function () {
+      // 需要在这里写那个ajax异步操作，不然它可能在没加载之前调用然后报错
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          cityName: '111'
         }
-      }
-    })
+      })
+    }
   </script>
 </body>
 </html>
