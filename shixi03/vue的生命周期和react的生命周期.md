@@ -100,4 +100,4 @@
 
 > 1. componentDidMount 用于接受接口的数据，进行定时器操作
 > 2. componentWillUnmonut 用于清除定时器
-> 3. this.setState() 用于数据的更新
+> 3. this.setState() 用于数据的更新 

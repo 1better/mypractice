@@ -1,98 +1,124 @@
-import React,{Component} from 'react'
-import ReactDom from 'react-dom'
+import React, { Component } from "react";
+import ReactDom from "react-dom";
 
-/* class Test extends Component {
+/* class Father extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      name: 'son'
+    }
+  }
+  Go = () => {
+    this.setState({name:'lisi'})
   }
   render() {
-    let arr = [1,2,3,4,5]
-    const list = arr.map( item => 
-      <li key={item}>
-        {item}
-      </li>
+    return (
+      <div>
+        <Children name={this.state.name} go={this.Go}/> 
+      </div>
     )
-    return <ul>{list}</ul>
   }
-} */
-// const { Provider, Consumer } = React.createContext('defaultValue')
-
-// const ProviderComp = (props) => (
-//   <Provider value={'realValue'}>
-//     {props.children}
-//   </Provider>
-// )
-
-// const ConsumerComp = () => (
-//   <Consumer>
-//     {(value) => <p>{value}</p>}
-//   </Consumer>
-// )
-
-//创建Context组件
-const {Provider,Consumer} = React.createContext({
-  theme: '#000',
-  toggle: () => {}, //向上下文设定一个回调方法
-});
-
-const themes = {
-  dark: '#000',
-  light: '#fff'
 }
-//运行APP
-class App extends React.Component {
+
+class Children extends Component {
+  constructor(props) {
+    super(props)
+    console.log(this)
+    this.fatherGo = this.fatherGo.bind(this)
+  }
+  fatherGo(){
+    this.props.go()
+  }
+  render() {
+    let name = this.props.name 
+    return (
+      <div onClick={this.fatherGo}>
+        {name}
+      </div>
+    )
+  }
+}
+ */
+
+/* class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {value:1}
+  }
+  changeValue = (e)=>{
+    let value = e.target.value
+    this.setState({value})
+  }
+  render() {
+    console.log(this.state.value)
+    return (
+      <select value={this.state.value} onChange={this.changeValue}>
+        <option value='1'>苹果</option>
+        <option value='2'>香蕉</option>
+        <option value='3'>草莓</option>
+        <option value='4'>葡萄</option>
+        <option value='5'>梨</option>
+      </select>
+    )
+  }
+}
+
+*/
+
+// 摘抄的网上的一段代码
+// 代码来源于《深入React技术栈》2.1.4节
+// 需求 当点击button时二维码显示  点击除二维码之外的区域二维码消失
+// 当如下设置的时候 点击二维码区域也会消失
+class QrCode extends Component {
   constructor(props) {
     super(props);
-
-    this.toggle = () => { //设定toggle方法，会作为context参数传递
-      this.setState(state => ({
-        theme:
-          state.theme === themes.dark
-            ? themes.light
-            : themes.dark,
-      }));
-    };
-
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClickQr = this.handleClickQr.bind(this);
     this.state = {
-      theme: themes.light,
-      toggle: this.toggle,
+      active: false,
     };
+  }
+  
+  componentDidMount() {
+    document.addEventListener('click', e => {
+      this.setState({
+        active: false
+      })
+    });
+    
+  }
+
+  componentWillUnmount() {
+    // document.body.removeEventListener('click');
+  }
+  
+  handleClick(e) {
+    e.nativeEvent.stopImmediatePropagation()
+    this.setState({
+      active: !this.state.active,
+    });
+  }
+  
+  handleClickQr(e) {
+    e.nativeEvent.stopImmediatePropagation()
   }
 
   render() {
     return (
-      <Provider value={this.state}> 
-        <Content />
-      </Provider>
+      <div className="qr-wrapper">
+        <button className="qr" onClick={this.handleClick}>二维码</button>
+        <div
+          className="code"
+          style={{ display: this.state.active ? 'block' : 'none' }}
+        >
+          <div className="qrCode" style={{width:'200px',height:'200px',backgroundColor:'red'}} onClick={this.handleClickQr}></div>
+        </div>
+      </div>
     );
   }
 }
 
-//中间组件
-function Content() {
-  return (
-    <div>
-      <Button />
-    </div>
-  );
-}
-
-//接收组件
-function Button() {
-  return (
-    <Consumer>
-      {({theme, toggle}) => (
-        <button
-          onClick={toggle} //调用回调
-          style={{backgroundColor: theme}}>
-          Toggle Theme
-        </button>
-      )}
-    </Consumer>
-  );
-}
-
 ReactDom.render(
-  <App/>,
-  document.getElementById('app')
-)
+  <QrCode />,
+  document.getElementById("app")
+); 
