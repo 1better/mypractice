@@ -137,13 +137,13 @@
 > let arr = [1,3,5,7,9]
 > 
 > let arr2 = arr.map(arr=>{
->   return arr*arr
+>   	return arr*arr
 > })
 > 
-> console.log(arr2) //arr 2 [1,8,25,49,81]
+> console.log(arr2) //arr 2 [1,9,25,49,81]
 > ```
 >
-> ### filters
+> ### filter
 >
 > ```js
 > // filters 过滤

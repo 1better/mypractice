@@ -302,15 +302,14 @@
 
 ## 其中学习到的操作以及方法
 
-> 1.  ```js
->    var list = [
+> 1. ```js
+>      var list = [
 >            {title: '222',done: false}
 >          ]
 >          this.todoList = new TodoMVC.TodoList(list);
->    // 和 backbone一样 也需要collection 集合model事件
->     ```
->
->    ```js
+>      // 和 backbone一样 也需要collection 集合model事件
+>      ```
+> ```js
 >    showFooter(todoList) {
 >    
 >          var footer = new TodoMVC.FooterLayout({
@@ -320,9 +319,9 @@
 >          TodoMVC.App.root.showChildView('footer',footer)
 >        },
 >     // 底部组件的渲染 需要传入collection
->    ```
->
->    ```js
+>     ```
+>    
+>```js
 >    TodoMVC.FooterLayout = Mn.View.extend({
 >        template: _.template($('#footer-template').html()),
 >    
@@ -381,8 +380,8 @@
 >    			};
 >    		},
 >    ```
->
->    ```js 
+>    
+>```js 
 >    regions: {
 >          listView: {
 >            el: 'ul',
@@ -398,8 +397,8 @@
 >        },
 >     // onRender 是一个渲染函数。在页面加载过程中会执行一次
 >    ```
->
->    ```js
+>    
+>```js
 >    TodoMVC.ItemView = Mn.View.extend({
 >        template: _.template($('#li-template').html()),
 >        tagName: 'li',
@@ -432,6 +431,6 @@
 >      })
 >    // 这个是marinonette的写法 比backbone 少了一个需要自己渲染页面的步骤
 >    ```
->
 >    
+>
 

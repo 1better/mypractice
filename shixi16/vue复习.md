@@ -63,9 +63,9 @@
 > //当你修改数组的长度时，例如：vm.items.length = newLength
 > 
 > var vm = new Vue({
->   data: {
->     items: ['a', 'b', 'c']
->   }
+>     data: {
+>       	items: ['a', 'b', 'c']
+>     }
 > })
 > vm.items[1] = 'x' // 不是响应性的
 > vm.items.length = 2 // 不是响应性的

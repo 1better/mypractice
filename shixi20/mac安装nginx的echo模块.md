@@ -26,9 +26,9 @@
 
 > ```js
 > $el.is(':checked')
-> // jquery判断是否选中
+> // 	jquery判断是否选中
 > //：冒号，冒号前面的属于这个属性的名字，后面的是这个属性的值
-> // eg $("#Academe :checkbox:checked"); 获取表格Academe里面所有被选中的复选框
+> // 	eg $("#Academe :checkbox:checked"); 获取表格Academe里面所有被选中的复选框
 > ```
 >
 > 
