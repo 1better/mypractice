@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = [11, [22, [33,77]], [44, 55], 66];
+
+      // 第一种  变成字符串再处理
+      // console.log(arr.join().split(','))
+
+      // console.log(arr.toString().split(','))
+
+      // 第二种  flat
+      console.log(arr.flat(1));  // 默认为 1  
+      console.log(arr.flat(Infinity))//使用 Infinity 作为深度，展开任意深度的嵌套数组
+    </script>
+  </body>
+</html>
