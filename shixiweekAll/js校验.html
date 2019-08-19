@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <fieldset>
+    <legend>表单验证</legend>
+    名字 <input type="text" >
+    <input type="submit" value="提交">
+  </fieldset>
+  <script>
+    var inputArr = document.querySelectorAll('input')
+    inputArr[1].onclick = function(e) {
+      e.preventDefault();
+      console.log(inputArr[0].value.length)
+    }
+  </script>
+</body>
+</html>
