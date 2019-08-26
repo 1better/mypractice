@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    div {
+      width: 500px;
+      height: 500px;
+      margin: 40px auto;
+      text-align: center;
+      background-color: red;
+      font-size: 100px;
+      line-height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    1
+  </div>
+  <script src="./防抖和节流.js"></script>
+  <script>
+    // 没有函数防抖节流的时候的效果
+    var div = document.querySelector('div')
+    var num = 1
+    /* div.onmousemove = function() {
+        
+    } */
+    function divGo() {
+      this.innerHTML = ++num;
+    }
+
+    div.onmousemove = debounceAll(divGo,1000,true)
+    
+  </script>
+</body>
+</html>
