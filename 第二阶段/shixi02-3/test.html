@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log("======== 1========");
+      new Promise(resolve => {
+        // 同步2
+        console.log("2");
+        resolve();
+      }).then(() => {
+        // 微1
+        console.log("3");
+        // 宏2
+        setTimeout(() => {
+          console.log("4");
+        }, 0);
+      });
+
+      // 同3
+      console.log("5");
+      // 宏1
+      setTimeout(() => {
+        // 微2
+        console.log("6");
+        new Promise(resolve => {
+          console.log("7");
+          resolve();
+        }).then(() => {
+          console.log("8");
+        });
+        console.log("9");
+        setTimeout(() => {
+          console.log("10");
+        }, 0);
+      }, 0);
+
+      new Promise(resolve => {
+        // 同4
+        console.log("11");
+        resolve();
+      }).then(() => {
+        // 微3
+        console.log("12");
+      });
+
+      // 同5
+      console.log("13");
+
+      // 1 2 5 11 13 3 12 6 7 9 8 4 10
+    </script>
+  </body>
+</html>
