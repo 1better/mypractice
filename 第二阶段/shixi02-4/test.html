@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #all div {
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        background: red;
+      }
+      #all .uploader1 {
+        background: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="all">
+      <div class="uploader uploader1">
+        <button>删除</button>
+      </div>
+      <div class="uploader uploader2" >
+        <button>删除</button>
+      </div>
+      <div class="uploader uploader3">
+        <button>删除</button>
+      </div>
+      <div class="uploader uploader4">
+        <button>删除</button>
+      </div>
+      <div class="uploader uploader5">
+        <button>删除</button>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    // jquery 循环遍历孩子元素查找符合条件的
+    $('#all').children().each(function(index,ele){
+      if($(ele).hasClass('uploader2')) {
+        console.log(index)
+        console.log(ele)
+      }
+    })
+    $('button').each(function(index,ele){
+      $(ele).click(function(){
+        var s = $(this).parent().remove()
+        $('#all').children().each(function(index,ele){
+          if($(ele).hasClass('uploader4')) {
+            $(ele).before(s)
+          }
+        })
+      })
+    })
+    
+  </script>
+</html>
