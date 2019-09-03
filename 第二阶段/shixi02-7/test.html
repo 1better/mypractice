@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="add">添加</button>
+    <div  v-for="item in list" :key="item.id" :ref="'item'+item.id">
+      {{item.id}}
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        list:[
+          {id:1},
+          {id:2}
+        ]
+      },
+      methods: {
+        add() {
+          this.list.push({id:3})
+          console.log(this.$refs.item3) // undefined
+          let self = this
+          this.$nextTick(function(){
+            console.log(self.$refs.item3[0]) // div
+            self.$refs.item3[0].style.color = 'red'
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>
