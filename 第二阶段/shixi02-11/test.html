@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* let a = 333;
+    console.log(window.a) */
+
+      // let 模拟
+      /* (function(){
+      var a = 333
+    })()
+    console.log(window.a) */
+
+      const arr = [11, [22, 33], [44, 55], 66];
+
+      // let arr1 = arr.toString().split(',')
+
+      // let arr1 = arr.join(',').split(',')
+
+      // console.log(arr1)
+
+      let arr1 = arr.flat(1);
+
+      console.log(arr1);
+    </script>
+  </body>
+</html>
