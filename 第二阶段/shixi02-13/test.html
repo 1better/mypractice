@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      html,
+      body,
+      div {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <script src="./手势滑动.js"></script>
+    <script>
+      let div = document.querySelector("div");
+      bindSwipeEvent(
+        div,
+        function() {
+          console.log("左滑");
+        },
+        function() {
+          console.log("右滑");
+        }
+      );
+    </script>
+  </body>
+</html>

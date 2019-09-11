@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 20px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div style="background-color: red"></div>
+  <script>
+    let div = document.querySelector('div')
+    let getStyle = function(dom,style) {
+      if(dom.currentStyle) {
+        return dom.currentStyle[style]
+      }else {
+        return window.getComputedStyle(dom)[style]
+      }
+    }
+    console.log(getStyle(div,'width'))
+    console.log(getStyle(div,'height'))
+    console.log(getStyle(div,'opacity'))
+    console.log(getStyle(div,'backgroundColor'))
+  </script>
+</body>
+</html>
