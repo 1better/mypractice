@@ -79,3 +79,8 @@ console.log('耗时', end - start)
 //   return result
 // }
 
+
+var phoneInput = $('input[name=RecruitmentPortalPersonProfile_Mobile]');
+phoneInput.off('blur keyup')
+
+$("input[name='RecruitmentPortalPersonProfile_Mobile']").off('keyup blur')

@@ -23,7 +23,9 @@ class SubCount extends React.Component {
     this.state = {number:123}
   }
   render() {
-    return this.state.number
+    return (
+      <div>{this.state.number}</div>
+    )
   }
 }
 

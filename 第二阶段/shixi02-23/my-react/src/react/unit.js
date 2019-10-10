@@ -6,24 +6,31 @@ class Unit {
   }
 }
 
-
+// 一个文本 进行渲染
 class ReactTextUnit extends Unit{
   getMarkUp(rootId) {
     this._rootId = rootId
-    return `<span data-reactid=${rootId}>${this.currentElement}</span>` 
+    // return `<span data-reactid=${rootId}>${this.currentElement}</span>` 
+    return this.currentElement
   }
 }
 
+// React.createElement 实现的
 class ReactNativeUnit extends Unit{
   getMarkUp(rootId) {
     this._rootId = rootId
     let {type,props} = this.currentElement
     // 拼接渲染的内容
+
+    // 一开始的type名字
     let targetStart = `<${type} data-reactid="${rootId}"`
     let targetEnd = `</${type}>`
     let contentStr
+
+    // 判断props的属性 'type' 'value'
     for(let propName in props) {
       if(/on[A-Z]/.test(propName)) {
+        // 处理事件绑定
         let propEvent = propName.slice(2).toLowerCase()
         // 原生js实现这一块
         /* document.addEventListener(propEvent,function(e){
@@ -62,7 +69,7 @@ class ReactCompositUnit extends Unit {
     this._rootId = rootId
     let {type:Component,props} = this.currentElement
     let componentInstance = new Component(props)
-    // 先父亲后子
+    // 先父亲后子 将要渲染
     componentInstance.componentWillMount && componentInstance.componentWillMount()
     let reactComponetRender = componentInstance.render()    
     // 递归渲染

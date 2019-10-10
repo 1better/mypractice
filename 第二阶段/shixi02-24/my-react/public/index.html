@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MVVM</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="school.name">
+      <div>{{school.name}}</div>
+      <div v-text='school.text'></div>
+      <div v-html='school.a'></div>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+      </ul>
+    </div>
+  </body>
+</html>
